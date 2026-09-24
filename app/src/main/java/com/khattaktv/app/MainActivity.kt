@@ -3,22 +3,18 @@ package com.khattaktv.app
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.khattaktv.app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var player: ExoPlayer? = null
+    private var currentChannel = 0
     private var currentServer = 0
 
-    // Each channel can carry 2–3 stream URLs. When the active URL fails,
-    // the player can advance to the next server without changing the channel.
-    private val channels = listOf(
-        Channel("Khattak TV", "PAKISTAN", listOf("SERVER_1", "SERVER_2", "SERVER_3")),
-        Channel("Pakistan News", "NEWS", listOf("SERVER_1", "SERVER_2", "SERVER_3")),
-        Channel("Pakistan Sports", "SPORTS", listOf("SERVER_1", "SERVER_2", "SERVER_3")),
-        Channel("Indian Entertainment", "INDIA", listOf("SERVER_1", "SERVER_2", "SERVER_3"))
-    )
+    private val channels = ChannelRepository.channels
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +30,19 @@ class MainActivity : AppCompatActivity() {
     private fun startPlayer() {
         try {
             player?.release()
-            player = ExoPlayer.Builder(this).build().also {
-                binding.playerView.player = it
-                currentServer = 0
-                // Stream URLs will be attached here as the channel catalogue is populated.
-                // Server order is preserved for automatic fallback: 1 -> 2 -> 3.
+            player = ExoPlayer.Builder(this).build().also { exo ->
+                binding.playerView.player = exo
+                exo.addListener(object : Player.Listener {
+                    override fun onPlayerError(error: androidx.media3.common.PlaybackException) {
+                        if (!moveToNextServer()) {
+                            Toast.makeText(
+                                this@MainActivity,
+                                "No playable official source is available for this channel.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                })
             }
         } catch (e: Exception) {
             player = null
@@ -46,11 +50,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun playChannel(index: Int) {
+        if (index !in channels.indices) return
+        currentChannel = index
+        currentServer = 0
+        loadCurrentServer()
+    }
+
+    private fun loadCurrentServer() {
+        val channel = channels.getOrNull(currentChannel) ?: return
+        val url = channel.servers.getOrNull(currentServer) ?: return
+        val exo = player ?: return
+        exo.setMediaItem(MediaItem.fromUri(url))
+        exo.prepare()
+        exo.playWhenReady = true
+    }
+
     private fun moveToNextServer(): Boolean {
-        val channel = channels.firstOrNull() ?: return false
+        val channel = channels.getOrNull(currentChannel) ?: return false
         if (currentServer + 1 >= channel.servers.size) return false
         currentServer++
-        // The real stream URL for this server is selected here when the channel feed is configured.
+        loadCurrentServer()
         return true
     }
 
