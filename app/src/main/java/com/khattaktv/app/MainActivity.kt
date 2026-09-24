@@ -1,6 +1,7 @@
 package com.khattaktv.app
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.exoplayer.ExoPlayer
 import com.khattaktv.app.databinding.ActivityMainBinding
@@ -17,8 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        player = ExoPlayer.Builder(this).build().also {
-            binding.playerView.player = it
+        try {
+            player = ExoPlayer.Builder(this).build()
+            binding.playerView.player = player
+        } catch (e: Exception) {
+            player = null
+            Toast.makeText(this, "Video player could not start", Toast.LENGTH_LONG).show()
         }
     }
 
