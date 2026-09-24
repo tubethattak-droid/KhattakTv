@@ -1,203 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#08090C">
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="#08090C">
 
     <androidx.media3.ui.PlayerView
-        android:id="@+id/playerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="104dp"
-        android:background="#101218"
-        android:keepScreenOn="true" />
+        android:id="@+id/playerView" android:layout_width="match_parent" android:layout_height="match_parent"
+        android:layout_marginStart="92dp" android:layout_marginTop="84dp" android:layout_marginEnd="28dp" android:layout_marginBottom="300dp"
+        android:background="#101218" android:keepScreenOn="true" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/top_gradient" />
+    <View android:layout_width="match_parent" android:layout_height="145dp" android:background="@drawable/top_gradient" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="78dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="30dp"
-        android:paddingEnd="30dp">
-
-        <TextView
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:background="#E53935"
-            android:gravity="center"
-            android:text="K\nTV"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khattak TV"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LIVE TELEVISION"
-                android:textColor="#969BA6"
-                android:textSize="10sp"
-                android:letterSpacing="0.12" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="78dp" android:gravity="center_vertical" android:paddingStart="30dp" android:paddingEnd="30dp">
+        <TextView android:layout_width="58dp" android:layout_height="58dp" android:background="#E53935" android:gravity="center" android:text="K\nTV" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Khattak TV" android:textColor="#FFFFFF" android:textSize="22sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LIVE TELEVISION" android:textColor="#969BA6" android:textSize="10sp" android:letterSpacing="0.12" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:background="#E53935"
-            android:paddingStart="11dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="11dp"
-            android:paddingBottom="5dp"
-            android:text="● LIVE"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:textStyle="bold" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="22dp" android:background="#E53935" android:paddingStart="11dp" android:paddingTop="5dp" android:paddingEnd="11dp" android:paddingBottom="5dp" android:text="● LIVE" android:textColor="#FFFFFF" android:textSize="11sp" android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="72dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="86dp"
-        android:layout_marginBottom="104dp"
-        android:background="#0D0F14"
-        android:gravity="top|center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="18dp">
-        <TextView
-            android:layout_width="56dp"
-            android:layout_height="52dp"
-            android:background="@drawable/nav_selected"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="⌂"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp" />
-        <TextView
-            android:layout_width="56dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="▦"
-            android:textColor="#8D929D"
-            android:textSize="24sp" />
-        <TextView
-            android:layout_width="56dp"
-            android:layout_height="52dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="⚙"
-            android:textColor="#8D929D"
-            android:textSize="23sp" />
+    <LinearLayout android:layout_width="72dp" android:layout_height="match_parent" android:layout_marginTop="84dp" android:layout_marginBottom="104dp" android:background="#0D0F14" android:gravity="top|center_horizontal" android:orientation="vertical" android:paddingTop="18dp">
+        <TextView android:layout_width="56dp" android:layout_height="52dp" android:background="@drawable/nav_selected" android:clickable="true" android:focusable="true" android:gravity="center" android:text="⌂" android:textColor="#FFFFFF" android:textSize="24sp" />
+        <TextView android:layout_width="56dp" android:layout_height="52dp" android:layout_marginTop="10dp" android:clickable="true" android:focusable="true" android:gravity="center" android:text="▦" android:textColor="#8D929D" android:textSize="24sp" />
+        <TextView android:layout_width="56dp" android:layout_height="52dp" android:layout_marginTop="10dp" android:clickable="true" android:focusable="true" android:gravity="center" android:text="⚙" android:textColor="#8D929D" android:textSize="23sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="104dp"
-        android:layout_gravity="bottom"
-        android:background="#F00B0D12"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="28dp"
-        android:paddingEnd="28dp">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Khattak TV Live"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Live broadcast • HD"
-                android:textColor="#969BA6"
-                android:textSize="12sp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="210dp" android:layout_gravity="bottom" android:layout_marginStart="92dp" android:layout_marginEnd="28dp" android:layout_marginBottom="82dp" android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="42dp" android:gravity="center_vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LIVE CHANNELS" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="18dp" android:text="HD" android:textColor="#E53935" android:textSize="12sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:text="NEWS" android:textColor="#8F95A0" android:textSize="12sp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:text="SPORTS" android:textColor="#8F95A0" android:textSize="12sp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="14dp" android:text="ENTERTAINMENT" android:textColor="#8F95A0" android:textSize="12sp" />
         </LinearLayout>
-        <TextView
-            android:layout_width="64dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/control_button"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="‹"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp" />
-        <TextView
-            android:layout_width="64dp"
-            android:layout_height="48dp"
-            android:background="@drawable/control_button"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="▶"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-        <TextView
-            android:layout_width="64dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/control_button"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="›"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp" />
+        <HorizontalScrollView android:layout_width="match_parent" android:layout_height="150dp" android:scrollbars="none">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:orientation="horizontal">
+                <LinearLayout android:layout_width="180dp" android:layout_height="138dp" android:layout_marginEnd="14dp" android:background="@drawable/tile_background" android:clickable="true" android:focusable="true" android:gravity="center" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="62dp" android:layout_height="62dp" android:background="#E53935" android:gravity="center" android:text="K\nTV" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Khattak TV" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HD • LIVE" android:textColor="#8F95A0" android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="180dp" android:layout_height="138dp" android:layout_marginEnd="14dp" android:background="@drawable/tile_background" android:clickable="true" android:focusable="true" android:gravity="center" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="62dp" android:layout_height="62dp" android:background="#242A35" android:gravity="center" android:text="HD" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="HD Channels" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="HD CATEGORY" android:textColor="#8F95A0" android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="180dp" android:layout_height="138dp" android:layout_marginEnd="14dp" android:background="@drawable/tile_background" android:clickable="true" android:focusable="true" android:gravity="center" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="62dp" android:layout_height="62dp" android:background="#242A35" android:gravity="center" android:text="N" android:textColor="#FFFFFF" android:textSize="24sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="News" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LIVE NEWS" android:textColor="#8F95A0" android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="180dp" android:layout_height="138dp" android:layout_marginEnd="14dp" android:background="@drawable/tile_background" android:clickable="true" android:focusable="true" android:gravity="center" android:orientation="vertical" android:padding="14dp">
+                    <TextView android:layout_width="62dp" android:layout_height="62dp" android:background="#242A35" android:gravity="center" android:text="S" android:textColor="#FFFFFF" android:textSize="24sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Sports" android:textColor="#FFFFFF" android:textSize="15sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LIVE SPORTS" android:textColor="#8F95A0" android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_marginStart="102dp"
-        android:layout_marginBottom="122dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LIVE CHANNELS"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="HD  •  NEWS  •  SPORTS  •  ENTERTAINMENT"
-            android:textColor="#8F95A0"
-            android:textSize="10sp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="82dp" android:layout_gravity="bottom" android:background="#F00B0D12" android:gravity="center_vertical" android:paddingStart="28dp" android:paddingEnd="28dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Khattak TV Live  •  HD Broadcast" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
+        <TextView android:layout_width="64dp" android:layout_height="48dp" android:layout_marginEnd="10dp" android:background="@drawable/control_button" android:clickable="true" android:focusable="true" android:gravity="center" android:text="‹" android:textColor="#FFFFFF" android:textSize="28sp" />
+        <TextView android:layout_width="64dp" android:layout_height="48dp" android:background="@drawable/control_button" android:clickable="true" android:focusable="true" android:gravity="center" android:text="▶" android:textColor="#FFFFFF" android:textSize="18sp" />
+        <TextView android:layout_width="64dp" android:layout_height="48dp" android:layout_marginStart="10dp" android:background="@drawable/control_button" android:clickable="true" android:focusable="true" android:gravity="center" android:text="›" android:textColor="#FFFFFF" android:textSize="28sp" />
     </LinearLayout>
 </FrameLayout>
