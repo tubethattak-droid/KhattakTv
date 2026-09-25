@@ -27,10 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        buildChannelCards()
-        showStartupLoader()
+        try {
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            buildChannelCards()
+            showStartupLoader()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Khattak TV could not start", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun showStartupLoader() {
@@ -45,26 +49,23 @@ class MainActivity : AppCompatActivity() {
             .start()
 
         mainHandler.postDelayed({
+            if (isFinishing || isDestroyed) return@postDelayed
             binding.splashOverlay.animate()
                 .alpha(0f)
                 .setDuration(350)
                 .withEndAction {
                     binding.splashOverlay.visibility = View.GONE
                     binding.splashOverlay.alpha = 1f
-                    startPlayer()
+                    // Player is intentionally lazy: the app must open even when
+                    // a device has no playable stream or media-service issue.
                 }
                 .start()
         }, 1100L)
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (binding.splashOverlay.visibility == View.GONE && player == null) startPlayer()
-    }
-
-    private fun startPlayer() {
-        try {
-            player?.release()
+    private fun ensurePlayer(): Boolean {
+        if (player != null) return true
+        return try {
             player = ExoPlayer.Builder(this).build().also { exo ->
                 binding.playerView.player = exo
                 exo.addListener(object : Player.Listener {
@@ -72,19 +73,20 @@ class MainActivity : AppCompatActivity() {
                         if (!moveToNextServer()) {
                             Toast.makeText(
                                 this@MainActivity,
-                                "No playable official source is available for this channel.",
+                                "Stream unavailable. Trying another source was not successful.",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
                 })
             }
-            if (channels.isNotEmpty()) loadCurrentServer()
+            true
         } catch (e: Exception) {
             player?.release()
             player = null
             binding.playerView.player = null
             Toast.makeText(this, "Video player could not start", Toast.LENGTH_LONG).show()
+            false
         }
     }
 
@@ -165,12 +167,14 @@ class MainActivity : AppCompatActivity() {
     private fun loadCurrentServer() {
         val channel = channels.getOrNull(currentChannel) ?: return
         val url = channel.servers.getOrNull(currentServer)
-        val exo = player ?: return
         if (url.isNullOrBlank()) {
-            Toast.makeText(this, "${channel.name}: no playable official source configured yet.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${channel.name}: no playable public source is configured yet.", Toast.LENGTH_SHORT).show()
             return
         }
+        if (!ensurePlayer()) return
+        val exo = player ?: return
         try {
+            exo.stop()
             exo.setMediaItem(MediaItem.fromUri(url))
             exo.prepare()
             exo.playWhenReady = true
