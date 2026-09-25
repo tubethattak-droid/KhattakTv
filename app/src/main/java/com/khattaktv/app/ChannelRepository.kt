@@ -1,21 +1,15 @@
 package com.khattaktv.app
 
 object ChannelRepository {
-    // Direct public HLS sources collected from current public listings.
-    // Sources can change or be geo-restricted; the player automatically tries
-    // the next configured server when playback fails.
+    // Direct public HLS sources only. Web/YouTube pages are deliberately not
+    // inserted as Media3 URLs because ExoPlayer needs a playable media stream.
+    // When a source has a second public HLS endpoint, it is used as fallback.
     val channels = listOf(
         Channel("Khattak TV", "LIVE", emptyList()),
 
-        Channel("PTV Home", "ENTERTAINMENT", listOf(
-            "https://www.ptv.com.pk/"
-        )),
-        Channel("PTV News", "NEWS", listOf(
-            "https://www.moib.gov.pk/LiveStream"
-        )),
-        Channel("PTV Sports", "SPORTS", listOf(
-            "https://www.ptv-sports.com.pk/live-streaming/"
-        )),
+        Channel("PTV Home", "ENTERTAINMENT", emptyList()),
+        Channel("PTV News", "NEWS", emptyList()),
+        Channel("PTV Sports", "SPORTS", emptyList()),
 
         Channel("Geo News", "NEWS", listOf(
             "https://jk3lz82elw79-hls-live.5centscdn.com/GEONEWS/3500ba09d0538297440ca620c9dd46bf.sdp/playlist.m3u8"
@@ -26,9 +20,10 @@ object ChannelRepository {
         Channel("Dunya News", "NEWS", listOf(
             "https://intl.dunyanews.tv/livehd/ngrp:dunyalivehd_2_all/playlist.m3u8"
         )),
-        Channel("Aaj News", "NEWS", listOf(
-            "https://www.aaj.tv/live"
-        )),
+        Channel("Aaj News", "NEWS", emptyList()),
+        Channel("Samaa TV", "NEWS", emptyList()),
+        Channel("Dawn News", "NEWS", emptyList()),
+        Channel("Hum News", "NEWS", emptyList()),
 
         Channel("DD National", "ENTERTAINMENT", listOf(
             "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/40492a64c1db4a1385ba1a397d357d3a/index.m3u8"
@@ -37,9 +32,7 @@ object ChannelRepository {
             "https://playhls.media.nic.in/live/ddnews/index.m3u8",
             "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/0811cd8c37ca4c409d5385a6cd2fa18b/index.m3u8"
         )),
-        Channel("DD Sports", "SPORTS", listOf(
-            "https://www.prasarbharati.gov.in/en/dd-sports-homepage/"
-        )),
+        Channel("DD Sports", "SPORTS", emptyList()),
         Channel("DD India", "NEWS", listOf(
             "https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/0811cd8c37ca4c409d5385a6cd2fa18b/index.m3u8"
         )),
