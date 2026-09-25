@@ -15,11 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import com.khattaktv.app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var player: ExoPlayer? = null
+    private var playerView: PlayerView? = null
     private var currentChannel = 0
     private var currentServer = 0
     private val channels = ChannelRepository.channels
@@ -33,7 +35,15 @@ class MainActivity : AppCompatActivity() {
             buildChannelCards()
             showStartupLoader()
         } catch (e: Exception) {
-            Toast.makeText(this, "Khattak TV could not start", Toast.LENGTH_LONG).show()
+            val message = e.message ?: e.javaClass.simpleName
+            setContentView(TextView(this).apply {
+                text = "Khattak TV\nStartup error: $message"
+                setTextColor(Color.WHITE)
+                textSize = 18f
+                gravity = Gravity.CENTER
+                setBackgroundColor(Color.rgb(8, 9, 12))
+                setPadding(40, 40, 40, 40)
+            })
         }
     }
 
@@ -56,8 +66,6 @@ class MainActivity : AppCompatActivity() {
                 .withEndAction {
                     binding.splashOverlay.visibility = View.GONE
                     binding.splashOverlay.alpha = 1f
-                    // Player is intentionally lazy: the app must open even when
-                    // a device has no playable stream or media-service issue.
                 }
                 .start()
         }, 1100L)
@@ -66,8 +74,20 @@ class MainActivity : AppCompatActivity() {
     private fun ensurePlayer(): Boolean {
         if (player != null) return true
         return try {
+            val view = PlayerView(this).apply {
+                useController = true
+                setShowBuffering(PlayerView.SHOW_BUFFERING_WHEN_PLAYING)
+                layoutParams = android.widget.FrameLayout.LayoutParams(
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                    android.view.ViewGroup.LayoutParams.MATCH_PARENT
+                )
+            }
+            binding.playerContainer.removeAllViews()
+            binding.playerContainer.addView(view)
+            playerView = view
+
             player = ExoPlayer.Builder(this).build().also { exo ->
-                binding.playerView.player = exo
+                view.player = exo
                 exo.addListener(object : Player.Listener {
                     override fun onPlayerError(error: androidx.media3.common.PlaybackException) {
                         if (!moveToNextServer()) {
@@ -84,7 +104,8 @@ class MainActivity : AppCompatActivity() {
         } catch (e: Exception) {
             player?.release()
             player = null
-            binding.playerView.player = null
+            playerView = null
+            binding.playerContainer.removeAllViews()
             Toast.makeText(this, "Video player could not start", Toast.LENGTH_LONG).show()
             false
         }
@@ -199,9 +220,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        binding.playerView.player = null
+        playerView?.player = null
         player?.release()
         player = null
+        playerView = null
         super.onStop()
     }
 
